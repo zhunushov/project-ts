@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { Box,  Card, CardActions, CardContent, IconButton, Typography } from "@material-ui/core";
 import { BookmarkBorder, Delete, Edit, ShoppingCart } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
-import { useActions, useHalpActionst } from "../../hooks/userActions";
+import { useUserActions, useCartActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { IUser } from "../../types/IUser";
 
@@ -13,8 +13,8 @@ const CardUser: FC<PropsItems> = ({item}) => {
   const navigate = useNavigate()
   const [color, setColor] = useState(false)
 
-  const { getUser, deleteUser } = useActions()
-  const { addCart, checkProductInCart, getCart } = useHalpActionst()
+  const { getUser, deleteUser } = useUserActions()
+  const { addCart, checkProductInCart, getCart } = useCartActions()
 
   const { cart } = useTypedSelector(state => state.cart)
   

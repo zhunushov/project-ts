@@ -155,6 +155,7 @@ export const deleteCart =(id: ICart, price: number) => {
             } 
            items = JSON.stringify(items); 
            localStorage.setItem("cart", items); 
+           getCartLength()
         } catch (error: any) {
             dispatch({type: CartActionTypes.GET_CART_ERROR, payload: error + "delete Cart"})
         }

@@ -1,14 +1,14 @@
 import { Pagination } from '@material-ui/lab';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useActions } from '../../hooks/userActions';
+import { useUserActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import CardUser from '../CardUser/CardUser';
 
 
 const ListUser = () => {
     const {user, error, loading, pagination} = useTypedSelector(state => state.user)
-    const { getUser } = useActions()
+    const { getUser } = useUserActions()
 
     const [params, setParams] = useSearchParams()
 

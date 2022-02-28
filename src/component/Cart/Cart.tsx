@@ -1,7 +1,7 @@
 import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import  { useEffect } from 'react';
-import { useHalpActionst } from '../../hooks/userActions';
+import { useCartActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { ICart } from '../../types/ICart';
 import { IUser } from '../../types/IUser';
@@ -9,7 +9,7 @@ import { IUser } from '../../types/IUser';
 
 
 const Cart = () => {
-    const { getCart, changeProductCount, deleteCart } = useHalpActionst()
+    const { getCart, changeProductCount, deleteCart } = useCartActions()
     const { cart, error } = useTypedSelector(state => state.cart)
     
     useEffect (()  => {

@@ -1,12 +1,12 @@
 import { Box, Button, TextField, Typography } from "@material-ui/core";
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useActions } from "../../hooks/userActions";
+import { useUserActions } from "../../hooks/useActions";
 
 
 const AddTodo: FC = () => {
     const navigate = useNavigate()
-    const { addUser, getUser } = useActions()
+    const { addUser, getUser } = useUserActions()
     const [values, setValues] = useState({name: '',lastName: '',phone: 0, price: 0})
     const handleSubmit = () => {
         if(!values.name && !values.lastName && !values.phone && !values.price){

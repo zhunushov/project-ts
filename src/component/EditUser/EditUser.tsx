@@ -1,7 +1,7 @@
 import { Box, Button, TextField, Typography } from "@material-ui/core";
 import { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useActions } from "../../hooks/userActions";
+import { useUserActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 type ParamsEditedUser = {
@@ -12,7 +12,7 @@ const EditUser: FC = () => {
     const navigate = useNavigate()
     const {id} = useParams<ParamsEditedUser>()
     const {edit, error, loading} = useTypedSelector(state => state.user)    
-    const { saveEditedUser, editUser, getUser } = useActions()
+    const { saveEditedUser, editUser, getUser } = useUserActions()
     const [values, setValues] = useState({name: '',lastName: '',phone: 0, price: 0})
 
     useEffect(() => {
