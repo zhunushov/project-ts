@@ -1,10 +1,9 @@
 import { FC } from "react";
+import MyRoutes from "./MyRoutes/MyRoutes";
 
 const App: FC = () => {
     return (
-        <div>
-           <h1>pola    </h1> 
-        </div>
+        <MyRoutes />
     );
 };
 
