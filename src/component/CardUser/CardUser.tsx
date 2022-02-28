@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
-import { Box, Button, Card, CardActions, CardContent, IconButton, Typography } from "@material-ui/core";
-import { Delete, Edit, ShoppingCart } from "@material-ui/icons";
+import { Box,  Card, CardActions, CardContent, IconButton, Typography } from "@material-ui/core";
+import { BookmarkBorder, Delete, Edit, ShoppingCart } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { useActions, useHalpActionst } from "../../hooks/userActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
@@ -48,16 +48,16 @@ const CardUser: FC<PropsItems> = ({item}) => {
       <Typography variant="body2">
        {item.price}
       </Typography>
-    </CardContent>
-    <CardActions>
-    <IconButton 
+     </CardContent>
+     <CardActions>
+     <IconButton 
       color={color ? 'primary' : 'inherit'}
       aria-label='share' 
       onClick={() => handleAddCart(item)}>
-      <ShoppingCart />
-    </IconButton>
+      <ShoppingCart/></IconButton>
      <IconButton onClick={handleDelete}><Delete/></IconButton>
      <IconButton onClick={() => navigate(`/edit/${item.id}`)}><Edit/></IconButton>
+     <IconButton><BookmarkBorder/></IconButton>
     </CardActions>
       </Card>
     </Box>

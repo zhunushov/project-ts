@@ -82,7 +82,7 @@ export const getCart = () => {
     }
 }
 
-export const changeProductCount = (count: ICart, id: IUser) => {
+export const changeProductCount = (count: number, id: IUser) => {
     return (dispatch: Dispatch<CartAction>) => {
         try {
             let cart = JSON.parse(localStorage.getItem('cart') as string);

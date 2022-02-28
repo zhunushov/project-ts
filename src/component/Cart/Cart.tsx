@@ -3,6 +3,8 @@ import { Delete } from '@material-ui/icons';
 import  { useEffect } from 'react';
 import { useHalpActionst } from '../../hooks/userActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { ICart } from '../../types/ICart';
+import { IUser } from '../../types/IUser';
 
 
 
@@ -10,17 +12,16 @@ const Cart = () => {
     const { getCart, changeProductCount, deleteCart } = useHalpActionst()
     const { cart, error } = useTypedSelector(state => state.cart)
     
-
     useEffect (()  => {
         getCart()
     }, [] )
 
-    const handleChangeCount = (count: any, id: string) => {
+    const handleChangeCount = (count: number, id: IUser) => {
         changeProductCount(count, id)
         getCart()
     }
 
-    const handleDeleteCart = (item: any, price: any) => {
+    const handleDeleteCart = (item: ICart, price: number) => {
         deleteCart(item, price)
         getCart()
     }
@@ -53,12 +54,12 @@ const Cart = () => {
                             <TableCell>{item.item.price}</TableCell>
                             <TableCell>
                             <input type="number" value={item.count} min = '1'
-                             onChange={(e) => handleChangeCount(e.target.value, item.item.id)}/>
+                             onChange={(e) => handleChangeCount(+e.target.value, item.item.id)}/>
                             </TableCell>
                             <TableCell>{item.subPrice}</TableCell>
                             <TableCell>
                             <IconButton onClick={() => handleDeleteCart(item.item.id, item.item.price)}> 
-                            <Delete /> 
+                             <Delete /> 
                             </IconButton>
                             </TableCell>
                          </TableRow>
