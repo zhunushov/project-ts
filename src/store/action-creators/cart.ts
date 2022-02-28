@@ -1,9 +1,26 @@
 import { ICart } from './../../types/ICart';
 import { Dispatch } from 'redux';
-import { calcSubPrice, calcTotalPrice } from '../../Halpers/Halpers';
 import { CartAction, CartActionTypes } from '../../types/cart-types';
 import { IUser } from './../../types/IUser';
 
+
+
+export function calcSubPrice(values: any){
+    return values.count * values.item.price
+}
+
+export function calcTotalPrice(values: any){
+    let totalPrice = 0;
+    values.forEach((elem: any) => {
+        totalPrice += elem.subPrice
+    })
+    return totalPrice
+}
+
+export function getProductsInCart(){
+    let cart = JSON.parse(localStorage.getItem('cart')|| '')
+    return cart ? cart.products.length : 0
+}
 
 export const addCart = (values: IUser) => {
     return  (dispatch: Dispatch<CartAction>) => {
