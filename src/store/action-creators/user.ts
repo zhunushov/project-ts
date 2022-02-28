@@ -4,7 +4,7 @@ import { Dispatch } from "redux"
 import axios from 'axios';
 import { API } from '../../Halpers/Halpers';
 
-export const addUser = (newUser: IUser) => {
+export const addUser = (newUser: any) => {
     return async (dispatch: Dispatch <UserAction>) => {
         try {
             dispatch({type: UserActionTypes.FETCH_USERS})
@@ -27,6 +27,7 @@ export const getUser = () => {
         }
     }
 }
+
 export const deleteUser = (id: any) => {
     return async (dispatch: Dispatch <UserAction>) => {
         try {
@@ -37,6 +38,7 @@ export const deleteUser = (id: any) => {
         }
     }
 }
+
 export const editUser = (id: any) => {
     return async (dispatch: Dispatch <UserAction>) => {
         try {
@@ -47,7 +49,8 @@ export const editUser = (id: any) => {
         }
     }
 }
-export const saveEditedUser = (id: any, editedUser: IUser) => {
+
+export const saveEditedUser = (id: any, editedUser: any) => {
     return async (dispatch: Dispatch<UserAction>) => {
         try {
             dispatch({type: UserActionTypes.FETCH_USERS})

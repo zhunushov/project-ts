@@ -3,32 +3,23 @@
     {
       "name": "abbas",
       "lastName": "abbsa",
-      "phone": 121212,
-      "id": 1
+      "phone": 999999,
+      "id": 2,
+      "price": 756376
     },
     {
       "name": "abbas",
       "lastName": "abbsa",
-      "phone": 121212,
-      "id": 2
-    },
-    {
-      "name": "abbas",
-      "lastName": "abbsa",
-      "phone": 121212,
-      "id": 4
-    },
-    {
-      "name": "abbas",
-      "lastName": "abbsa",
-      "phone": 121212,
-      "id": 5
+      "phone": 996705031712,
+      "id": 4,
+      "price": 900
     },
     {
       "name": "wer",
-      "lastName": "cvbbv",
+      "lastName": "zhunushov",
       "phone": 436524,
-      "id": 6
+      "id": 6,
+      "price": 19
     }
   ]
 }

@@ -7,6 +7,7 @@ export const useActions = () => {
     const dispatch = useDispatch()
     return bindActionCreators(actionCreators, dispatch)
 }
+
 export const useHalpActionst = () => {
     const dispatch = useDispatch()
     return bindActionCreators(actionCartCreators, dispatch)

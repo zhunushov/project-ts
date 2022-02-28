@@ -1,8 +1,5 @@
 export interface CartState  {
-    cart: {
-        users: any[]
-        totalPhone: number
-    },
+    cart: any,
     cartLength: number,
     error: null | string
 }
@@ -17,10 +14,12 @@ interface CartActionSuccess {
     type: CartActionTypes.GET_CARTS;
     payload: any
 }
+
 interface CartActionError {
     type: CartActionTypes.GET_CART_ERROR;
     payload: string
 }
+
 interface CartActionLength {
     type: CartActionTypes.GET_CART_LENGTH;
     payload: number

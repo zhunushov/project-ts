@@ -1,4 +1,4 @@
-import { AppBar, Badge, Box, Button, Input, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Avatar, Badge, Box, Button, IconButton, Input, Toolbar, Typography } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
@@ -9,10 +9,10 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 export default function MyNavbar(){
   const { cartLength } = useTypedSelector(state => state.cart)
   const { getCartLength } = useHalpActionst()
+  const { getUser } = useActions()
   
   const [searchParams, setSearchParams] = useSearchParams()  
   const [searchVal, setSearchVal] = useState<string>(searchParams.get("q") || "")
-  const { getUser } = useActions()
 
   useEffect(() => {
     setSearchParams({
@@ -21,16 +21,17 @@ export default function MyNavbar(){
       _page: '0',
     })
   }, [searchVal])
+
   useEffect(() => {
     getCartLength()
   }, [])
 
   const handleValue = (e:  React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-     setSearchVal(e.target.value)
-     getUser()
+    setSearchVal(e.target.value)
+    getUser()
   }
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between' }}>
       <AppBar position="static">
         <Toolbar>
             <Typography >
@@ -43,6 +44,11 @@ export default function MyNavbar(){
             <ShoppingCart />
             </NavLink>
           </Badge>
+          <NavLink to={'/user'}>
+            <IconButton>
+              <Avatar sizes=" small" />
+            </IconButton>
+          </NavLink>
         </Toolbar>
       </AppBar>
     </Box>

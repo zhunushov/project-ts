@@ -1,4 +1,5 @@
+import { IUser } from './IUser';
 export interface ICart {
-    users: any[],
+    users: IUser[],
     totalPhone: number,
 }

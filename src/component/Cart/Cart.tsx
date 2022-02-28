@@ -1,4 +1,5 @@
-import { Input, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { Delete } from '@material-ui/icons';
 import  { useEffect } from 'react';
 import { useHalpActionst } from '../../hooks/userActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
@@ -6,49 +7,65 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 
 const Cart = () => {
-    const { getCart, changePhoneCount } = useHalpActionst()
-    const { cart } = useTypedSelector(state => state.cart)
-    console.log(cart);
-   
+    const { getCart, changeProductCount, deleteCart } = useHalpActionst()
+    const { cart, error } = useTypedSelector(state => state.cart)
+    
 
-    useEffect(() => {
+    useEffect (()  => {
         getCart()
-    }, [])
+    }, [] )
+
+    const handleChangeCount = (count: any, id: string) => {
+        changeProductCount(count, id)
+        getCart()
+    }
+
+    const handleDeleteCart = (item: any, price: any) => {
+        deleteCart(item, price)
+        getCart()
+    }
+    
+    if(error) {
+        return <h1>{error}</h1>
+    }
     
     return (
         <TableContainer>
-           <Table>
-            <TableHead>
+            <Table>
+             <TableHead>
                 <TableRow>
-                    <TableCell>0:</TableCell>
+                    <TableCell>+</TableCell>
                     <TableCell>Name:</TableCell>
-                    <TableCell>LastName:</TableCell>
                     <TableCell>Phone:</TableCell>
+                    <TableCell>Price:</TableCell>
                     <TableCell>Count:</TableCell>
+                    <TableCell>SubPrice:</TableCell>
                     <TableCell>Delete:</TableCell>
                 </TableRow>
-            </TableHead>
+             </TableHead>
             <TableBody>
                 {
-                    cart ? cart.users.map((item, index) => (
+                    cart.users?.map((item: any, index: number) => (
                          <TableRow key={index}>
                             <TableCell>{index + 1}</TableCell>
                             <TableCell>{item.item.name}</TableCell>
-                            <TableCell>{item.item.lastName}</TableCell>
                             <TableCell>{item.item.phone}</TableCell>
-                            {/* <input 
-                                  type="number"
-                                  value={item.num}
-                                  onChange={(e) => changePhoneCount(+e.target.value, item.item.id)}
-                                  min = '1'
-                              /> */}
-                            <TableCell>{item.item.phone}</TableCell>
+                            <TableCell>{item.item.price}</TableCell>
+                            <TableCell>
+                            <input type="number" value={item.count} min = '1'
+                             onChange={(e) => handleChangeCount(e.target.value, item.item.id)}/>
+                            </TableCell>
+                            <TableCell>{item.subPrice}</TableCell>
+                            <TableCell>
+                            <IconButton onClick={() => handleDeleteCart(item.item.id, item.item.price)}> 
+                            <Delete /> 
+                            </IconButton>
+                            </TableCell>
                          </TableRow>
- 
-                    )): <h1>loading...</h1>
+                    ))
                 }
                 <TableCell>Total</TableCell>
-                <TableCell>{cart.totalPhone}</TableCell>
+                <TableCell>{cart.totalPrice}</TableCell>
              </TableBody>
             </Table> 
         </TableContainer>

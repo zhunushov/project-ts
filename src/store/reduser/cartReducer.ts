@@ -1,10 +1,7 @@
 import { CartState, CartAction, CartActionTypes } from './../../types/cart-types';
 
 const INIT_STATE: CartState = {
-    cart: {
-        users: [],
-        totalPhone: 0 
-    },
+   cart: {},
    cartLength: 0,
    error: null
 }

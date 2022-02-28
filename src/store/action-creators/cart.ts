@@ -1,133 +1,145 @@
-import { CartAction, CartActionTypes } from './../../types/cart-types';
+import { ICart } from './../../types/ICart';
 import { Dispatch } from 'redux';
+import { calcSubPrice, calcTotalPrice } from '../../Halpers/Halpers';
+import { CartAction, CartActionTypes } from '../../types/cart-types';
+import { IUser } from './../../types/IUser';
 
 
-export function calcSubNumber(user: any){
-    return user.num * user.item.phone
-}
-
-export function calcTotalPhone(users: any){
-    let totalPhone = 0;
-    users.forEach((elem: any) => {
-        totalPhone += elem.subNum
-    })
-    return totalPhone
-}
-
-export function  getProductsInCart(){
-    let cart = JSON.parse(`${localStorage.getItem('cart')}`);
-    return cart ? cart.users.length : 0
-}
-
-export const addCart =  (user: any) => {
-    console.log(user);
-       
-    return async (dispatch: Dispatch<CartAction>) => {
-    try {
-        let cart = JSON.parse(`${localStorage.getItem('cart' || '{}')}`);
-        console.log(cart);
-        
-        if(!cart.users){
-            
-            cart = {
-                users: [],
-                totalPhone: 0
-            }
-        }
-
-        let newUser = {
-            item: user,
-            num: 1,
-            subNum: 0
-        }
-
-        let filteredCart = []
-         filteredCart = cart.users.filter((elem: any) => elem.item.id === user.id)
-
-        if(filteredCart.length > 0){
-           cart.users.filter((elem: any ) => elem.item.id !== user.id)
-        } else {
-            cart.users.push(newUser)
-        }
-
-        localStorage.setItem('cart', JSON.stringify(user || '[]'))
-
-        newUser.subNum = calcSubNumber(newUser)
-        cart.totalPhone = calcTotalPhone(cart.users)
-
-        dispatch({type: CartActionTypes.GET_CART_LENGTH, payload: cart.users.length})
-    } catch (error: any) {        
-        dispatch({type: CartActionTypes.GET_CART_ERROR, payload: error})
-    }
-  } 
-}
-
-export  const getCart = () => {
-    return async (dispatch : Dispatch<CartAction>) => {
+export const addCart = (values: IUser) => {
+    return  (dispatch: Dispatch<CartAction>) => {
         try {
             let cart = JSON.parse(`${localStorage.getItem('cart')}`);
-
-            if(!cart.users){
+            
+            if(!cart){
                 cart = {
                     users: [],
-                    totalPhone: 0
+                    totalPrice: 0
                 }
-            }  
+            }
+            let newUser = {
+                item: values,
+                count: 1,
+                subPrice: 0
+            }
+            let filteredCart = cart.users.filter((elem: any) => elem.item.id === values.id)
 
-           dispatch({type: CartActionTypes.GET_CARTS, payload: cart })
+            if(filteredCart.length > 0){
+
+                cart.users = cart.users.filter((elem: any) => elem.item.id !== values.id)
+
+            } else {
+
+                cart.users.push(newUser)
+
+            }
+
+            newUser.subPrice = calcSubPrice(newUser)
+
+            cart.totalPrice = calcTotalPrice(cart.users)
+
+            localStorage.setItem('cart', JSON.stringify(cart))
+
+            dispatch({type: CartActionTypes.GET_CART_LENGTH, payload: cart.users.length})
         } catch (error: any) {
-           dispatch({ type: CartActionTypes.GET_CART_ERROR, payload: error}) 
+            dispatch({type: CartActionTypes.GET_CART_ERROR, payload: error})
         }
-    }
-}   
+}
+}
+
 
 export const getCartLength = () => {
-    return async (dispatch: Dispatch<CartAction>) => {
+    return  (dispatch : Dispatch<CartAction>) => {
         try {
-            let cart = JSON.parse(`${localStorage.getItem('cart')}`);
-            if(!cart.users){
+          let cart = JSON.parse(`${localStorage.getItem('cart')}`);
+            if(!cart){
                 cart = {
                     users: [],
-                    totalPhone: 0
+                    totalPrice: 0
                 }
-            }  
-           dispatch({type: CartActionTypes.GET_CART_LENGTH, payload: cart.users.length})
+            }
+            dispatch({type: CartActionTypes.GET_CART_LENGTH, payload: cart.users.length})
         } catch (error: any) {
-           dispatch({type: CartActionTypes.GET_CART_ERROR, payload: error})  
+           dispatch({type: CartActionTypes.GET_CART_ERROR, payload: error}) 
         }
     }
 }
 
-export const changePhoneCount = (num: number, id: any) => {
-    let cart = JSON.parse(`${localStorage.getItem('cart')}`);
-    cart.users = cart.users.map((elem: any) => {
-        if(elem.item.id === id){
-            elem.num = num
-            elem.subNum = calcSubNumber(elem)
-        }
-        return elem
-    })
-    cart.totalPhone = calcTotalPhone(cart.users)
-    localStorage.setItem('cart', JSON.stringify([cart]))
-    getCart()
-}
-
-export const checkPhoneInCart = (id: any) => {
-    return async (dispatch: Dispatch<CartAction>) => {
-    try {
-        let cart = JSON.parse(`${localStorage.getItem('cart')}`);
-
-        if(!cart.users){
-            cart = {
-                users: [],
-                totalPhone: 0
+export const getCart = () => {
+    return (dispatch: Dispatch<CartAction>) => {
+        try {
+             let cart =  JSON.parse(`${localStorage.getItem('cart')}`);
+            if(!cart){
+                cart = {
+                    users: [],
+                    totalPrice: 0
+                }
             }
+
+            dispatch({type: CartActionTypes.GET_CARTS, payload: cart})
+        } catch (error: any) {
+            dispatch({type: CartActionTypes.GET_CART_ERROR, payload: error})
         }
-        let newCart = cart.users.filter((elem: any) => elem.item.id === id)
-        return newCart.length > 0 ? true : false
-    } catch (error: any) {
-        dispatch({type: CartActionTypes.GET_CART_ERROR, payload: error})
-    } 
-  }
+    }
 }
-  
+
+export const changeProductCount = (count: ICart, id: IUser) => {
+    return (dispatch: Dispatch<CartAction>) => {
+        try {
+            let cart = JSON.parse(localStorage.getItem('cart') as string);
+            cart.users = cart.users.map((elem: any) => {
+                if(elem.item.id === id){
+                    elem.count = count
+                    elem.subPrice = calcSubPrice(elem)
+                }
+                return elem
+            })
+            cart.totalPrice = calcTotalPrice(cart.users)
+            localStorage.setItem('cart', JSON.stringify(cart))
+        } catch (error: any) {
+            dispatch({type: CartActionTypes.GET_CART_ERROR, payload: error})
+        }
+    }
+}
+
+export const checkProductInCart = (id: number) => {
+    return (dispatch: Dispatch<CartAction>) => {
+        try {
+            let cart = JSON.parse(`${localStorage.getItem('cart')}`);
+            if(!cart){
+                cart = {
+                    users: [],
+                    totalPrice: 0
+                }
+            }
+            let newCart = cart.users.find((elem: any) => elem.item.id === id)
+            
+            return newCart ? true : false
+        } catch (error: any) {
+            dispatch({type: CartActionTypes.GET_CART_ERROR, payload: error})
+        }   
+    }
+}
+ 
+export const deleteCart =(id: ICart, price: number) => { 
+    return (dispatch: Dispatch<CartAction>) => {
+        try {
+            let items = JSON.parse(`${localStorage.getItem('cart')}`) 
+            for (let i = 0; i< items.users.length; i++) { 
+              let targetItem = JSON.parse(items.users[i].item.id); 
+              let targetItemPrice = JSON.parse(items.users[i].item.price); 
+               
+              if (targetItem == id) { 
+                  items.users.splice(i, 1); 
+              } 
+        
+              if (targetItemPrice == price){ 
+                items.totalPrice = items.totalPrice - price 
+              } 
+            } 
+           items = JSON.stringify(items); 
+           localStorage.setItem("cart", items); 
+        } catch (error: any) {
+            dispatch({type: CartActionTypes.GET_CART_ERROR, payload: error + "delete Cart"})
+        }
+    }
+}
