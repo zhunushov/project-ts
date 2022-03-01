@@ -1,5 +1,5 @@
 import { AppBar, Avatar, Badge, Box, Button, IconButton, Input, Toolbar, Typography } from "@material-ui/core";
-import { ShoppingCart } from "@material-ui/icons";
+import { ShoppingCart, BookmarkBorder } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
 import { useUserActions, useCartActions } from "../../hooks/useActions";
@@ -8,6 +8,7 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 export default function MyNavbar(){
   const { cartLength } = useTypedSelector(state => state.cart)
+  const { elecLength } = useTypedSelector(state => state.elec)
   const { getCartLength } = useCartActions()
   const { getUser } = useUserActions()
   
@@ -42,6 +43,11 @@ export default function MyNavbar(){
           <Badge badgeContent={cartLength}>
             <NavLink to={'/cart'}>
             <ShoppingCart />
+            </NavLink>
+          </Badge>
+          <Badge badgeContent={elecLength}>
+            <NavLink to={'/elec'}>
+            <BookmarkBorder  />
             </NavLink>
           </Badge>
           <NavLink to={'/user'}>

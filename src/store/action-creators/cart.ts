@@ -145,13 +145,13 @@ export const deleteCart =(id: ICart, price: number) => {
               let targetItem = JSON.parse(items.users[i].item.id); 
               let targetItemPrice = JSON.parse(items.users[i].item.price); 
                
-              if (targetItem == id) { 
-                  items.users.splice(i, 1); 
-              } 
+                if (targetItem == id) { 
+                    items.users.splice(i, 1); 
+                } 
         
-              if (targetItemPrice == price){ 
-                items.totalPrice = items.totalPrice - price 
-              } 
+                if (targetItemPrice == price){ 
+                  items.totalPrice = items.totalPrice - price 
+                } 
             } 
            items = JSON.stringify(items); 
            localStorage.setItem("cart", items); 

@@ -2,13 +2,14 @@ import { FC, useEffect, useState } from "react";
 import { Box,  Card, CardActions, CardContent, IconButton, Typography } from "@material-ui/core";
 import { BookmarkBorder, Delete, Edit, ShoppingCart } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
-import { useUserActions, useCartActions } from "../../hooks/useActions";
+import { useUserActions, useCartActions, useElecActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { IUser } from "../../types/IUser";
 
 interface PropsItems {
     item: IUser
 }
+
 const CardUser: FC<PropsItems> = ({item}) => {
   const navigate = useNavigate()
   const [color, setColor] = useState(false)
@@ -17,7 +18,8 @@ const CardUser: FC<PropsItems> = ({item}) => {
   const { addCart, checkProductInCart, getCart } = useCartActions()
 
   const { cart } = useTypedSelector(state => state.cart)
-  
+  const { addElected } = useElecActions()
+
   const handleDelete = async () => {
     await deleteUser(item.id)
     getUser()
@@ -57,7 +59,8 @@ const CardUser: FC<PropsItems> = ({item}) => {
       <ShoppingCart/></IconButton>
      <IconButton onClick={handleDelete}><Delete/></IconButton>
      <IconButton onClick={() => navigate(`/edit/${item.id}`)}><Edit/></IconButton>
-     <IconButton><BookmarkBorder/></IconButton>
+     <IconButton onClick={() => addElected(item)}>
+     <BookmarkBorder/></IconButton>
     </CardActions>
       </Card>
     </Box>
