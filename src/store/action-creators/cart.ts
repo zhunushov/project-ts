@@ -54,7 +54,6 @@ export const addCart = (values: IUser) => {
             cart.totalPrice = calcTotalPrice(cart.users)
 
             localStorage.setItem('cart', JSON.stringify(cart))
-
             dispatch({type: CartActionTypes.GET_CART_LENGTH, payload: cart.users.length})
             dispatch({type: CartActionTypes.GET_CARTS, payload: cart})
         } catch (error: any) {

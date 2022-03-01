@@ -47,7 +47,7 @@ const ListUser = () => {
         <div>
         <div style={{marginTop: "50px", display: "flex", alignItems: "center", justifyContent: 'center', flexWrap: 'wrap'}}>
             {
-            user?.map(item => <CardUser key={item.id} item={item}/>    )
+            user?.map(item => <CardUser key={item.id} item={item}/>)
             }
         </div>
         <div style={{justifyContent: 'center', display: 'flex'}}>

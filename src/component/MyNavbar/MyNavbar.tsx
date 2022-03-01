@@ -31,8 +31,8 @@ export default function MyNavbar(){
   }, [])
 
   const handleValue = (e:  React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setSearchVal(e.target.value)
     getUser()
+    setSearchVal(e.target.value)
   }
   return (
     <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between' }}>
