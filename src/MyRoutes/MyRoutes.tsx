@@ -5,7 +5,7 @@ import Cart from '../component/Cart/Cart';
 import EditUser from '../component/EditUser/EditUser';
 import Elec from '../component/Elec/Elec';
 import ListUser from '../component/ListUser/ListUser';
-import MyNavbar from '../component/MyNavbar/MyNavbar';
+import MyNavbar from '../MyNavbar/MyNavbar';
 
 const MyRoutes: FC = () => {
     return (

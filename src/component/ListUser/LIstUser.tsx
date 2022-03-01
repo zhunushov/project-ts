@@ -8,36 +8,36 @@ import CardUser from '../CardUser/CardUser';
 
 const ListUser = () => {
     const {user, error, loading, pagination} = useTypedSelector(state => state.user)
+    const [params, setParams] = useSearchParams()
+    const [ limit ] = useState<any>(6)
+    const [page, setPage] = useState<any>(params.get("_page") ? params.get("_page") : 1 )
     const { getUser } = useUserActions()
 
-    const [params, setParams] = useSearchParams()
-
-    const [limit, setLimit] = useState<any>(6)
-    const [page, setPage] = useState<any>(params.get("_page") ? params.get("_page") : 1 )
 
     useEffect(() => {
         setParams({
             _limit: limit,
             _page: page,
-          });
+        });
     }, [limit, page]);
 
     const handlePage = (_: any , pageVal: any) => {
-         setParams({
+        setParams({
              _page: pageVal,
              _limit: limit,
-            })
-            getUser()
-          setPage(pageVal)
+        })
+        getUser()
+        setPage(pageVal)
     }   
 
     useEffect(() => {
-         getUser()
+        getUser()
     },[])
 
     if(loading){
         return <h1>Loading...</h1>
     }
+    
     if(error) {
         return <h1>{error}</h1>
     }

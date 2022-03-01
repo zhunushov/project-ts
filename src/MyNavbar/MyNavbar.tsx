@@ -1,9 +1,9 @@
-import { AppBar, Avatar, Badge, Box, Button, IconButton, Input, Toolbar, Typography } from "@material-ui/core";
-import { ShoppingCart, BookmarkBorder } from "@material-ui/icons";
+import { AppBar,  Badge, Box, Button, IconButton, Input, Toolbar, Typography } from "@material-ui/core";
+import { ShoppingCart, BookmarkBorder, AccessAlarm } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
-import { useUserActions, useCartActions, useElecActions } from "../../hooks/useActions";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useCartActions, useElecActions, useUserActions } from "../hooks/useActions";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 
 export default function MyNavbar(){
@@ -55,7 +55,7 @@ export default function MyNavbar(){
           </Badge>
           <NavLink to={'/user'}>
             <IconButton>
-              <Avatar sizes=" small" />
+              <AccessAlarm />
             </IconButton>
           </NavLink>
         </Toolbar>
