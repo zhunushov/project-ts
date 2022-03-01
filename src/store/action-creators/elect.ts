@@ -1,4 +1,3 @@
-import { IElec } from './../../types/IElec';
 import { ElecAction,  ElecActionTypes} from './../../types/elec-types';
 import { Dispatch } from 'redux';
 import { IUser } from './../../types/IUser';
@@ -67,7 +66,6 @@ export const getElectedLength = () => {
 }
 
 export const deleteElec = (value: any) => {
-    console.log(value)
     return (dispatch: Dispatch<ElecAction>) => {
         try {
             let elec = JSON.parse(`${localStorage.getItem('elec')}`)
@@ -81,8 +79,27 @@ export const deleteElec = (value: any) => {
             elec.elected = elec.elected.filter((elem: any) =>  elem.item.id !== value.id)
             localStorage.setItem("elec", JSON.stringify(elec))
            dispatch({type: ElecActionTypes.GET_ELEC, payload: elec})
+           dispatch({type: ElecActionTypes.GET_ELEC_LENGHT, payload: elec.elected.length})
         } catch (e: any) {
            dispatch({type: ElecActionTypes.GET_ELEC_ERROR, payload: e}) 
+        }
+    }
+}
+export const checkElec = (id: number) => {
+    return (dispatch: Dispatch<ElecAction>) => {
+        try {
+            let  elec = JSON.parse(`${localStorage.getItem('elec')}`)
+            if(!elec) {
+                elec = {
+                    elected: []
+                }
+            }
+
+            let newElec = elec.elected.find((elem:any) => elem.item.id === id)
+
+            return newElec ? true : false
+        } catch (error: any) {
+            dispatch({type: ElecActionTypes.GET_ELEC_ERROR, payload: error})
         }
     }
 }

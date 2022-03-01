@@ -12,27 +12,28 @@ interface PropsItems {
 
 const CardUser: FC<PropsItems> = ({item}) => {
   const navigate = useNavigate()
-  const [color, setColor] = useState(false)
-
   const { getUser, deleteUser } = useUserActions()
-  const { addCart, checkProductInCart, getCart } = useCartActions()
 
+  const [color, setColor] = useState(false)
+  const [colorElec, setColorElec] = useState(false)
+  
   const { cart } = useTypedSelector(state => state.cart)
-  const { addElected } = useElecActions()
+  const { elec } = useTypedSelector(state => state.elec)
+
+  const { addCart, checkProductInCart, getCart } = useCartActions()
+  const { addElected,  checkElec } = useElecActions()
 
   const handleDelete = async () => {
     await deleteUser(item.id)
     getUser()
   }
-
-  const handleAddCart = (item: IUser) => {
-    addCart(item)
-    getCart()
-  }
-
   useEffect(() => {
     checkProductInCart(item.id) ? setColor(true): setColor(false)
   },[cart])
+
+  useEffect(() => {
+    checkElec(item.id) ? setColorElec(true): setColorElec(false)
+  },[elec])
 
   return (
     <Box sx={{ maxWidth: 275, margin: 20 }}>
@@ -50,17 +51,18 @@ const CardUser: FC<PropsItems> = ({item}) => {
       <Typography variant="body2">
        {item.price}
       </Typography>
-     </CardContent>
-     <CardActions>
-     <IconButton 
-      color={color ? 'primary' : 'inherit'}
-      aria-label='share' 
-      onClick={() => handleAddCart(item)}>
+      </CardContent>
+      <CardActions>
+
+     <IconButton onClick={() => addCart(item)} color={color ? 'primary' : 'inherit'}>
       <ShoppingCart/></IconButton>
+
      <IconButton onClick={handleDelete}><Delete/></IconButton>
      <IconButton onClick={() => navigate(`/edit/${item.id}`)}><Edit/></IconButton>
-     <IconButton onClick={() => addElected(item)}>
+
+     <IconButton onClick={() => addElected(item)} color={colorElec ? 'secondary' : 'inherit'} >
      <BookmarkBorder/></IconButton>
+
     </CardActions>
       </Card>
     </Box>

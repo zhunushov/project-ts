@@ -4,25 +4,20 @@ import  { useEffect } from 'react';
 import { useCartActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { ICart } from '../../types/ICart';
-import { IUser } from '../../types/IUser';
 
 
 
 const Cart = () => {
-    const { getCart, changeProductCount, deleteCart } = useCartActions()
+    const { getCart, changeProductCount, deleteCart , getCartLength } = useCartActions()
     const { cart, error } = useTypedSelector(state => state.cart)
     
     useEffect (()  => {
         getCart()
-    }, [] )
-
-    const handleChangeCount = (count: number, id: IUser) => {
-        changeProductCount(count, id)
-        getCart()
-    }
+    },[])
 
     const handleDeleteCart = (item: ICart, price: number) => {
         deleteCart(item, price)
+        getCartLength()
         getCart()
     }
     
@@ -54,11 +49,11 @@ const Cart = () => {
                             <TableCell>{item.item.price}</TableCell>
                             <TableCell>
                             <input type="number" value={item.count} min = '1'
-                             onChange={(e) => handleChangeCount(+e.target.value, item.item.id)}/>
+                             onChange={(e) => changeProductCount(+e.target.value, item.item.id)}/>
                             </TableCell>
                             <TableCell>{item.subPrice}</TableCell>
                             <TableCell>
-                            <IconButton onClick={() => handleDeleteCart(item.item.id, item.item.price)}> 
+                            <IconButton onClick={() => handleDeleteCart(item.item.id, item.item.price)} > 
                              <Delete /> 
                             </IconButton>
                             </TableCell>

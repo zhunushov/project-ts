@@ -31,8 +31,7 @@ export const getUser = () => {
 export const deleteUser = (id: any) => {
     return async (dispatch: Dispatch <UserAction>) => {
         try {
-            await axios.delete(`${API}/${id}`)
-            getUser()
+             await axios.delete(`${API}/${id}`)
         } catch (error: any) {
             dispatch({type: UserActionTypes.FETCH_USERS_ERROR, payload: error})
         }
