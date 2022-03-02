@@ -12,8 +12,10 @@ interface CommnetActionSuccess {
     type: CommentActionTypes.FETCH_COMMENT;
     payload: any[]
 }
+
 interface CommnetActionError {
     type: CommentActionTypes.FETCH_ERROR;
     payload: string
 }
+
 export type CommentAction = CommnetActionSuccess | CommnetActionError

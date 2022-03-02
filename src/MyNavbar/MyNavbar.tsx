@@ -4,16 +4,16 @@ import { useEffect, useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
 import { useCartActions, useElecActions, useUserActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useAuth } from "../store/action-creators/auth";
 
 export default function MyNavbar(){
+  
   const { cartLength } = useTypedSelector(state => state.cart)
   const { elecLength } = useTypedSelector(state => state.elec)
-  const {  auth  } = useTypedSelector(state => state.auth)
-  
   const { getCartLength } = useCartActions()
   const { getElectedLength } = useElecActions()
   const { getUser } = useUserActions()
-  
+  const auth = useAuth()   
   const [searchParams, setSearchParams] = useSearchParams()  
   const [searchVal, setSearchVal] = useState<string>(searchParams.get("q") || "")
 
@@ -59,7 +59,7 @@ export default function MyNavbar(){
               <AccessAlarm />
             </IconButton>
           </NavLink>
-          { auth.user ? <span>{auth.user.email}</span> : null}
+          { auth ? <span>{auth.email}</span> : null}
         </Toolbar>
       </AppBar>
     </Box>

@@ -7,8 +7,7 @@ import { auth } from '../../Auth/Firebase';
 export const SignUp =  (email: string, password: string) => {
     return async (dispatch: Dispatch<AuthAction>) => {
         try {
-            const user = await createUserWithEmailAndPassword(auth, email, password) 
-            dispatch({type: AuthActionTypes.AUTH_SUCCES, payload: user})            
+            createUserWithEmailAndPassword(auth, email, password) 
         } catch (error) {
             dispatch({type: AuthActionTypes.AUTH_ERROR, payload: error + "error of Sign Up"})
         }
@@ -18,8 +17,7 @@ export const SignUp =  (email: string, password: string) => {
 export const SignIn =  (email: string, password: string) => {
     return async (dispatch: Dispatch<AuthAction>) => {
         try {
-            const user = await signInWithEmailAndPassword(auth, email, password)
-            dispatch({type: AuthActionTypes.AUTH_SUCCES, payload: user})
+            signInWithEmailAndPassword(auth, email, password)
         } catch (error) {
             dispatch({type: AuthActionTypes.AUTH_ERROR, payload: error + "error of Sign In"})
         }
@@ -34,28 +32,20 @@ const provider = new GoogleAuthProvider()
 export const googleAuth = () => {
     return async (dispatch: Dispatch <AuthAction>) => {
         try {
-            const user = await signInWithPopup(auth, provider)
-            dispatch({type: AuthActionTypes.AUTH_SUCCES, payload: user})
+            signInWithPopup(auth, provider)
         } catch (err) {
             dispatch({type: AuthActionTypes.AUTH_ERROR, payload: err + "error of google Auth"})
         }
     }
 }
 
-
-// export const useAuth = () => {
-//     return async (dispatch: Dispatch<AuthAction>) => {
-//         try {
-//             const [currentUser, setCurrentUser] = useState<any>(auth)
-//                 useEffect(() => {
-//                     const ons = onAuthStateChanged(auth, user => {
-//                         setCurrentUser(user)
-//                     })
-//                     return ons
-//                 }, []) 
-//                 dispatch({type: AuthActionTypes.AUTH_SUCCES, payload: currentUser})
-//         } catch (error) {
-//             dispatch({type: AuthActionTypes.AUTH_ERROR, payload: error + "error of useAuth"}) 
-//         }
-//     }
-// }
+export const useAuth = () => {
+    const [currentUser, setCurrentUser] = useState<any>()
+    useEffect(() => {
+        const onsub = onAuthStateChanged(auth, user => {
+            setCurrentUser(user)
+        })
+        return onsub
+    }, [])
+    return currentUser 
+}

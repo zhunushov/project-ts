@@ -1,100 +1,62 @@
 {
   "person": [
     {
-      "name": "dgh",
-      "lastName": "dghdgh",
-      "phone": 4350,
-      "price": 454,
+      "name": "aba",
+      "lastName": "bafd",
+      "phone": 4345,
+      "price": 45,
       "id": 1
     },
     {
-      "name": "fggfhfghf",
-      "lastName": "dghdfh",
-      "phone": 544443,
-      "price": 345,
+      "name": "sfdgdf",
+      "lastName": "gf",
+      "phone": 546,
+      "price": 563,
       "id": 2
     }
   ],
   "comment": [
     {
-      "personId": 1,
-      "value": {
-        "text": "aaaaaaaa"
-      },
-      "user": {
-        "createdAt": "2022-03-02T09:56:36.337Z",
-        "user": {
-          "uid": "dCXxGti6JsMAIj1Xl82oNkLPznW2",
-          "email": "aa@gmail.com",
-          "photoURL": null,
-          "displayName": null
-        }
-      },
-      "id": 10
-    },
-    {
       "personId": 2,
       "value": {
-        "text": "sldnfsojd"
+        "text": "dfsd"
       },
       "user": {
-        "createdAt": "2022-03-02T10:09:13.753Z",
-        "user": {
-          "uid": "dCXxGti6JsMAIj1Xl82oNkLPznW2",
-          "email": "aa@gmail.com",
-          "photoURL": null,
-          "displayName": null
-        }
+        "createdAt": "2022-03-02T13:01:34.837Z",
+        "uid": "dCXxGti6JsMAIj1Xl82oNkLPznW2",
+        "email": "aa@gmail.com",
+        "photoURL": null,
+        "displayName": null
       },
-      "id": 11
+      "id": 2
     },
     {
       "personId": 1,
       "value": {
-        "text": "fdgd"
+        "text": "ffdf"
       },
       "user": {
-        "createdAt": "2022-03-02T10:12:17.378Z",
-        "user": {
-          "uid": "dCXxGti6JsMAIj1Xl82oNkLPznW2",
-          "email": "aa@gmail.com",
-          "photoURL": null,
-          "displayName": null
-        }
+        "createdAt": "2022-03-02T13:03:37.707Z",
+        "uid": "dCXxGti6JsMAIj1Xl82oNkLPznW2",
+        "email": "aa@gmail.com",
+        "photoURL": null,
+        "displayName": null
       },
-      "id": 12
+      "id": 3
     },
     {
       "personId": 1,
       "value": {
-        "text": "fdgd"
+        "text": "fdsf"
       },
       "user": {
-        "createdAt": "2022-03-02T10:12:17.378Z",
-        "user": {
-          "uid": "dCXxGti6JsMAIj1Xl82oNkLPznW2",
-          "email": "aa@gmail.com",
-          "photoURL": null,
-          "displayName": null
-        }
+        "createdAt": "2022-03-02T13:03:41.310Z",
+        "uid": "dCXxGti6JsMAIj1Xl82oNkLPznW2",
+        "email": "aa@gmail.com",
+        "photoURL": null,
+        "displayName": null
       },
-      "id": 12
-    },
-    {
-      "personId": 1,
-      "value": {
-        "text": "fdgd"
-      },
-      "user": {
-        "createdAt": "2022-03-02T10:12:17.378Z",
-        "user": {
-          "uid": "dCXxGti6JsMAIj1Xl82oNkLPznW2",
-          "email": "aa@gmail.com",
-          "photoURL": null,
-          "displayName": null
-        }
-      },
-      "id": 12
+      "id": 4
     }
   ]
 }
