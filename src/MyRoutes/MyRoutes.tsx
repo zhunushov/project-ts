@@ -1,5 +1,7 @@
 import { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import Login from '../Auth/Login';
+import Register from '../Auth/Register';
 import AddTodo from '../component/AddUser/AddUser';
 import Cart from '../component/Cart/Cart';
 import EditUser from '../component/EditUser/EditUser';
@@ -9,7 +11,7 @@ import MyNavbar from '../MyNavbar/MyNavbar';
 
 const MyRoutes: FC = () => {
     return (
-        <>
+        <>  
         <MyNavbar />
         <Routes>
             <Route path='/' element={<AddTodo />} />
@@ -17,6 +19,8 @@ const MyRoutes: FC = () => {
             <Route path='/edit/:id' element={<EditUser />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/elec' element={<Elec/>} />
+            <Route path='/login' element={<Login/>} />
+            <Route path='/register' element={<Register/>} />
         </Routes>
         </>
     );

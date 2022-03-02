@@ -1,4 +1,3 @@
-import { IComment } from './IComment';
 export interface CommentState {
     comment: any[];
     error: null | string;

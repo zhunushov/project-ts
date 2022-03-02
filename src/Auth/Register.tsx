@@ -28,22 +28,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login: FC = () => {
-  const { SignIn } = useAuthActions()
-  const { error } = useTypedSelector(state => state.auth)
-  
+const Register: FC = () => {
+  const { SignUp } = useAuthActions()
+  const {} = useTypedSelector(state => state)
   const classes = useStyles();
-  const [values, setValues] = useState({email:"",password:""});
+  const [values, setValues] = useState({
+    email: '',
+    password: ""
+  });
 
   const handleSubmit = (e : any) => {
     e.preventDefault();
-    SignIn(values.email, values.password)
+    SignUp(values.email, values.password)
     console.log(values);
   };
-
-  if(error) {
-    return <h1>{error}</h1>
-  }
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
@@ -70,11 +68,11 @@ const Login: FC = () => {
         </Button>
         </Link>
          <Button type="submit" variant="contained" color="primary">
-          Sign In
+          Sign Up
         </Button>
       </div>
     </form>
-  );
+  )
 };
 
-export default Login;
+export default Register;
