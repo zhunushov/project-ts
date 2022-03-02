@@ -5,7 +5,7 @@ const INIT_STATE: CommentState = {
     error: null
 }
 
-export const  commnetReducer = (state = INIT_STATE, action: CommentAction): CommentState => {
+export const  commentReducer = (state = INIT_STATE, action: CommentAction): CommentState => {
     switch(action.type) {
         case CommentActionTypes.FETCH_COMMENT:
             return {...state, comment: action.payload};

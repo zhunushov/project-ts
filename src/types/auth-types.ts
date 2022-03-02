@@ -1,4 +1,3 @@
-import { IAuth } from "./IAuth";
 
 export interface AuthState {
     auth: any

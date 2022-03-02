@@ -4,6 +4,7 @@ import * as actionCreators from '../store/action-creators/user'
 import * as actionCartCreators from '../store/action-creators/cart'
 import * as actionElecCreators from '../store/action-creators/elect'
 import * as actionAuthCreators from '../store/action-creators/auth'
+import * as actionCommentCreators from '../store/action-creators/comment'
 
 export const useUserActions = () => {
     const dispatch = useDispatch()
@@ -23,4 +24,9 @@ export const useElecActions = () => {
 export const useAuthActions = () => {
     const dispatch = useDispatch()
     return bindActionCreators(actionAuthCreators, dispatch)
+}
+
+export const useCommentActions = () => {
+    const  dispatch = useDispatch()
+    return bindActionCreators(actionCommentCreators, dispatch)
 }

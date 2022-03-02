@@ -1,7 +1,7 @@
 import { AuthState, AuthAction, AuthActionTypes } from './../../types/auth-types';
 const INIT_STATE: AuthState = {
     error: null,
-    auth: null
+    auth: {},
 }
 
 export const authReducer = (state = INIT_STATE, action: AuthAction): AuthState => {

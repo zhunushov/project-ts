@@ -59,7 +59,7 @@ export default function MyNavbar(){
               <AccessAlarm />
             </IconButton>
           </NavLink>
-          <span>{auth.user.email}</span>
+          { auth.user ? <span>{auth.user.email}</span> : null}
         </Toolbar>
       </AppBar>
     </Box>
