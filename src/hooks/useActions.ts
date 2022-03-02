@@ -5,7 +5,6 @@ import * as actionCartCreators from '../store/action-creators/cart'
 import * as actionElecCreators from '../store/action-creators/elect'
 import * as actionAuthCreators from '../store/action-creators/auth'
 
-
 export const useUserActions = () => {
     const dispatch = useDispatch()
     return bindActionCreators(actionCreators, dispatch)

@@ -5,11 +5,11 @@ import { NavLink, useSearchParams } from "react-router-dom";
 import { useCartActions, useElecActions, useUserActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 
-
 export default function MyNavbar(){
   const { cartLength } = useTypedSelector(state => state.cart)
   const { elecLength } = useTypedSelector(state => state.elec)
-
+  const {  auth  } = useTypedSelector(state => state.auth)
+  
   const { getCartLength } = useCartActions()
   const { getElectedLength } = useElecActions()
   const { getUser } = useUserActions()
@@ -30,10 +30,11 @@ export default function MyNavbar(){
     getElectedLength()
   }, [])
 
-  const handleValue = (e:  React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleValue = (e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
     getUser()
     setSearchVal(e.target.value)
   }
+  
   return (
     <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between' }}>
       <AppBar position="static">
@@ -58,6 +59,7 @@ export default function MyNavbar(){
               <AccessAlarm />
             </IconButton>
           </NavLink>
+          <span>{auth.user.email}</span>
         </Toolbar>
       </AppBar>
     </Box>
