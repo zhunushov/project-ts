@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Login from '../Auth/Login';
 import Register from '../Auth/Register';
+import Chat from '../Chat/Chat';
 import AddTodo from '../component/AddUser/AddUser';
 import Cart from '../component/Cart/Cart';
 import EditUser from '../component/EditUser/EditUser';
@@ -21,6 +22,7 @@ const MyRoutes: FC = () => {
             <Route path='/elec' element={<Elec/>} />
             <Route path='/login' element={<Login/>} />
             <Route path='/register' element={<Register/>} />
+            <Route path='/chat' element={<Chat/>} />
         </Routes>
         </>
     );

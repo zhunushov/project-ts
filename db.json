@@ -15,48 +15,5 @@
       "id": 2
     }
   ],
-  "comment": [
-    {
-      "personId": 2,
-      "value": {
-        "text": "dfsd"
-      },
-      "user": {
-        "createdAt": "2022-03-02T13:01:34.837Z",
-        "uid": "dCXxGti6JsMAIj1Xl82oNkLPznW2",
-        "email": "aa@gmail.com",
-        "photoURL": null,
-        "displayName": null
-      },
-      "id": 2
-    },
-    {
-      "personId": 1,
-      "value": {
-        "text": "ffdf"
-      },
-      "user": {
-        "createdAt": "2022-03-02T13:03:37.707Z",
-        "uid": "dCXxGti6JsMAIj1Xl82oNkLPznW2",
-        "email": "aa@gmail.com",
-        "photoURL": null,
-        "displayName": null
-      },
-      "id": 3
-    },
-    {
-      "personId": 1,
-      "value": {
-        "text": "fdsf"
-      },
-      "user": {
-        "createdAt": "2022-03-02T13:03:41.310Z",
-        "uid": "dCXxGti6JsMAIj1Xl82oNkLPznW2",
-        "email": "aa@gmail.com",
-        "photoURL": null,
-        "displayName": null
-      },
-      "id": 4
-    }
-  ]
+  "comment": []
 }
