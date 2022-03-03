@@ -7,7 +7,6 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useAuth } from "../store/action-creators/auth";
 
 export default function MyNavbar(){
-  
   const { cartLength } = useTypedSelector(state => state.cart)
   const { elecLength } = useTypedSelector(state => state.elec)
   const { getCartLength } = useCartActions()

@@ -17,5 +17,20 @@
       "id": 2
     }
   ],
-  "comment": []
+  "comment": [
+    {
+      "productId": 1,
+      "value": {
+        "text": "fdgdfg"
+      },
+      "user": {
+        "createdAt": "2022-03-03T06:56:04.534Z",
+        "uid": "oLWJA1P1B0PxZtnRlPyUDCRyAGK2",
+        "email": "abbas@gmail.com",
+        "photoURL": null,
+        "displayName": null
+      },
+      "id": 1
+    }
+  ]
 }

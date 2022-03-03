@@ -75,7 +75,7 @@ const CardProduct: FC<PropsItems> = ({item}) => {
 
   const { comment } = useTypedSelector(state => state.comment)  
   const [values, setValues] = useState({text: ''})
-
+  
   const handleSubmit = async () => {
     if(!values.text.trim()){
       return alert('заполните поля')}
@@ -140,7 +140,7 @@ const CardProduct: FC<PropsItems> = ({item}) => {
             </IconButton>
         </InputAdornment>)}}/>:null
       }
-      {comment?.map((elem) => elem.productId === item.id ? 
+      {comment?.map((elem) => (elem.productId === item.id ? 
                 <Card className={classes.cart} key={elem.id}>
                 <Typography gutterBottom >
                     <span>
@@ -153,7 +153,7 @@ const CardProduct: FC<PropsItems> = ({item}) => {
                    </IconButton>
                 </Typography>
                </Card>
-      :null)}
+      :null))}
       </Card>  
     </Box>
   );
