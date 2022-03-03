@@ -13,7 +13,7 @@ const EditProduct: FC = () => {
     const {id} = useParams<ParamsEditedProduct>()
     const { edit, error, loading} = useTypedSelector(state => state.product)    
     const { saveEditedProduct, editProduct, getProduct } = useProductActions()
-    const [values, setValues] = useState({title: '',type: '',photo: 0, price: 0})
+    const [values, setValues] = useState({title: '',type: '',photo: '', price: 0})
 
     useEffect(() => {
         if(edit)
@@ -34,7 +34,7 @@ const EditProduct: FC = () => {
         if( !values.title && !values.type && !values.photo && !values.price){
             return
         }
-        setValues({title: '', type: "", photo: 0, price: 0})
+        setValues({title: '', type: "", photo: '', price: 0})
         saveEditedProduct(id, values)
         navigate('/')
         getProduct()
@@ -45,7 +45,7 @@ const EditProduct: FC = () => {
         <Typography variant='h4' >Edit Product</Typography>
         <TextField style={{padding : '5px'}} variant='outlined' label='Title' value={values.title} onChange={e => setValues({...values, title: e.target.value })}/>
         <TextField style={{padding : '5px'}} variant='outlined' label='Type' value={values.type} onChange={e => setValues({...values, type: e.target.value })}/>
-        <TextField style={{padding : '5px'}} variant='outlined' label='Image' value={values.photo} onChange={e => setValues({...values, photo: +e.target.value})}/>
+        <TextField style={{padding : '5px'}} variant='outlined' label='Image' value={values.photo} onChange={e => setValues({...values, photo: e.target.value})}/>
         <TextField style={{padding : '5px'}} variant='outlined' label='Price' value={values.price} onChange={e => setValues({...values, price: +e.target.value})}/>
         <Button variant='contained' onClick={handleSubmit}>Save </Button> 
         </Box>

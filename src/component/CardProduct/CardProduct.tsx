@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import {  Avatar, Box,  Button,  Card, CardActions, CardContent, IconButton, InputAdornment, makeStyles, TextField, Typography } from "@material-ui/core";
+import {  Avatar, Box,  Button,  Card, CardActions, CardContent, CardMedia, IconButton, InputAdornment, makeStyles, TextField, Typography } from "@material-ui/core";
 import { BookmarkBorder, Delete, Edit, ShoppingCart } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { useProductActions, useCartActions, useElecActions, useCommentActions } from "../../hooks/useActions";
@@ -31,6 +31,10 @@ const useStyles = makeStyles(theme => ({
  },
  email: {
      fontSize: 10
+ },
+ img: {
+   height: '100px',
+   width: '100px'
  }
 }));
 
@@ -106,9 +110,7 @@ const CardProduct: FC<PropsItems> = ({item}) => {
       <Typography variant="h5" component="div">
         {item.type}
       </Typography>
-      <Typography variant="body2">
-       {item.photo}
-      </Typography>
+      <CardMedia className={classes.img} image={item.photo}/> 
       <Typography variant="body2">
        {item.price}
       </Typography>
