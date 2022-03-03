@@ -1,4 +1,4 @@
-import { CartState, CartAction, CartActionTypes } from './../../types/cart-types';
+import { CartState, CartAction, CartActionTypes } from '../../types/cart-types';
 
 const INIT_STATE: CartState = {
    cart: {},

@@ -31,8 +31,8 @@ const Cart = () => {
              <TableHead>
                 <TableRow>
                     <TableCell>+</TableCell>
-                    <TableCell>Name:</TableCell>
-                    <TableCell>Phone:</TableCell>
+                    <TableCell>Title:</TableCell>
+                    <TableCell>photo:</TableCell>
                     <TableCell>Price:</TableCell>
                     <TableCell>Count:</TableCell>
                     <TableCell>SubPrice:</TableCell>
@@ -41,11 +41,11 @@ const Cart = () => {
              </TableHead>
             <TableBody>
                 {
-                    cart.users?.map((item: any, index: number) => (
+                    cart.products?.map((item: any, index: number) => (
                          <TableRow key={index}>
                             <TableCell>{index + 1}</TableCell>
-                            <TableCell>{item.item.name}</TableCell>
-                            <TableCell>{item.item.phone}</TableCell>
+                            <TableCell>{item.item.title}</TableCell>
+                            <TableCell>{item.item.photo}</TableCell>
                             <TableCell>{item.item.price}</TableCell>
                             <TableCell>
                             <input type="number" value={item.count} min = '1'

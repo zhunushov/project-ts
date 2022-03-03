@@ -1,8 +1,8 @@
 import { ElecAction,  ElecActionTypes} from './../../types/elec-types';
 import { Dispatch } from 'redux';
-import { IUser } from './../../types/IUser';
+import { IProduct } from '../../types/IProduct';
 
-export const addElected = (value: IUser) => {
+export const addElected = (value: IProduct) => {
     return (dispatch: Dispatch<ElecAction>) => {
         try {
            let elec = JSON.parse(`${localStorage.getItem("elec")}`)

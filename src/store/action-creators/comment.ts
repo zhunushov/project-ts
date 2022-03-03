@@ -6,7 +6,7 @@ import axios from 'axios';
 export const addCommnet = (id: number, value: object, user: object) => {    
     return async (dispatch: Dispatch<CommentAction>) => {
         try {
-             await axios.post(`${API}/${COMMENT}`,{personId: id, value, user})
+             await axios.post(`${API}/${COMMENT}`,{ProductId: id, value, user})
         } catch (error) {
             console.log(error);
             dispatch({type: CommentActionTypes.FETCH_ERROR, payload: error + "error of Add Comment"})

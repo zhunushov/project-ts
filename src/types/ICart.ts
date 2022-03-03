@@ -1,5 +1,5 @@
-import { IUser } from './IUser';
+import { IProduct } from './IProduct';
 export interface ICart {
-    users: IUser[],
+    users: IProduct[],
     totalPhone: number,
 }

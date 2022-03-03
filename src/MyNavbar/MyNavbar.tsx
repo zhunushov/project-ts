@@ -2,7 +2,7 @@ import { AppBar,  Badge, Box, Button, IconButton, Input, Toolbar, Typography } f
 import { ShoppingCart, BookmarkBorder, AccessAlarm } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
-import { useCartActions, useElecActions, useUserActions } from "../hooks/useActions";
+import { useCartActions, useElecActions, useProductActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useAuth } from "../store/action-creators/auth";
 
@@ -12,7 +12,7 @@ export default function MyNavbar(){
   const { elecLength } = useTypedSelector(state => state.elec)
   const { getCartLength } = useCartActions()
   const { getElectedLength } = useElecActions()
-  const { getUser } = useUserActions()
+  const { getProduct } = useProductActions()
   const auth = useAuth()   
   const [searchParams, setSearchParams] = useSearchParams()  
   const [searchVal, setSearchVal] = useState<string>(searchParams.get("q") || "")
@@ -31,7 +31,7 @@ export default function MyNavbar(){
   }, [])
 
   const handleValue = (e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
-    getUser()
+    getProduct()
     setSearchVal(e.target.value)
   }
   

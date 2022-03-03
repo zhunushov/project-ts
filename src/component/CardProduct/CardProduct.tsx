@@ -2,9 +2,9 @@ import { FC, useEffect, useState } from "react";
 import {  Avatar, Box,  Button,  Card, CardActions, CardContent, IconButton, InputAdornment, makeStyles, TextField, Typography } from "@material-ui/core";
 import { BookmarkBorder, Delete, Edit, ShoppingCart } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
-import { useUserActions, useCartActions, useElecActions, useCommentActions } from "../../hooks/useActions";
+import { useProductActions, useCartActions, useElecActions, useCommentActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { IUser } from "../../types/IUser";
+import { IProduct } from "../../types/IProduct";
 import { useAuth } from "../../store/action-creators/auth";
 
 
@@ -17,7 +17,8 @@ const useStyles = makeStyles(theme => ({
   },
   inp: {
     marginBottom: '50px',
-  },   avatar: {
+  },   
+  avatar: {
     height: 20,
     width: 20,
     display: 'flex',
@@ -34,10 +35,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface PropsItems {
-    item: IUser
+    item: IProduct
 }
 
-const CardUser: FC<PropsItems> = ({item}) => {
+const CardProduct: FC<PropsItems> = ({item}) => {
   const classes = useStyles()
   const navigate = useNavigate()
   const [color, setColor] = useState(false)
@@ -46,7 +47,7 @@ const CardUser: FC<PropsItems> = ({item}) => {
   const { addCart, checkProductInCart } = useCartActions()
   const { addElected,  checkElec } = useElecActions()
   const { addCommnet } = useCommentActions()
-  const { getUser, deleteUser } = useUserActions()
+  const { getProduct, deleteProduct } = useProductActions()
   const { getComment, deleteComment } = useCommentActions()
 
   const { cart } = useTypedSelector(state => state.cart)
@@ -54,8 +55,8 @@ const CardUser: FC<PropsItems> = ({item}) => {
   const auth = useAuth()
   
   const handleDelete = async () => {
-    await deleteUser(item.id)
-    getUser()
+    await deleteProduct(item.id)
+    getProduct()
   }
 
   useEffect(() => {
@@ -100,13 +101,13 @@ const CardUser: FC<PropsItems> = ({item}) => {
       <Card variant="outlined">
       <CardContent>
       <Typography gutterBottom>
-       {item.name}
+       {item.title}
       </Typography>
       <Typography variant="h5" component="div">
-        {item.phone}
+        {item.type}
       </Typography>
       <Typography variant="body2">
-       {item.lastName}
+       {item.photo}
       </Typography>
       <Typography variant="body2">
        {item.price}
@@ -139,7 +140,7 @@ const CardUser: FC<PropsItems> = ({item}) => {
             </IconButton>
         </InputAdornment>)}}/>:null
       }
-      {comment?.map((elem) => elem.personId === item.id ? 
+      {comment?.map((elem) => elem.productId === item.id ? 
                 <Card className={classes.cart} key={elem.id}>
                 <Typography gutterBottom >
                     <span>
@@ -157,4 +158,4 @@ const CardUser: FC<PropsItems> = ({item}) => {
     </Box>
   );
 }
-export default CardUser;
+export default CardProduct;

@@ -1,4 +1,4 @@
-import { IUser } from './IUser';
+import { IProduct } from './IProduct';
 export interface IElec {
-    elec: IUser[],
+    elec: IProduct[],
 }

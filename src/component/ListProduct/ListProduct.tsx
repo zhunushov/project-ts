@@ -1,17 +1,16 @@
 import { Pagination } from '@material-ui/lab';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useUserActions } from '../../hooks/useActions';
+import { useProductActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import CardUser from '../CardUser/CardUser';
+import CardProduct from '../CardProduct/CardProduct';
 
-
-const ListUser = () => {
-    const {user, error, loading, pagination} = useTypedSelector(state => state.user)
+const ListProduct = () => {
+    const {products, error, loading, pagination} = useTypedSelector(state => state.product)
     const [params, setParams] = useSearchParams()
     const [ limit ] = useState<any>(6)
     const [page, setPage] = useState<any>(params.get("_page") ? params.get("_page") : 1 )
-    const { getUser } = useUserActions()
+    const { getProduct } = useProductActions()
 
 
     useEffect(() => {
@@ -26,12 +25,12 @@ const ListUser = () => {
              _page: pageVal,
              _limit: limit,
         })
-        getUser()
+        getProduct()
         setPage(pageVal)
     }   
 
     useEffect(() => {
-        getUser()
+        getProduct()
     },[])
 
     if(loading){
@@ -47,7 +46,7 @@ const ListUser = () => {
         <div>
         <div style={{marginTop: "50px", display: "flex", alignItems: "center", justifyContent: 'center', flexWrap: 'wrap'}}>
             {
-            user?.map(item => <CardUser key={item.id} item={item}/>)
+            products?.map(item => <CardProduct key={item.id} item={item}/>)
             }
         </div>
         <div style={{justifyContent: 'center', display: 'flex'}}>
@@ -57,4 +56,4 @@ const ListUser = () => {
     );
 };
 
-export default ListUser;
+export default ListProduct;
