@@ -1,5 +1,5 @@
 import { addDoc, collection, orderBy, query, onSnapshot } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { db, firebase } from '../Auth/Firebase';
 import { useAuth } from '../store/action-creators/auth';
@@ -17,7 +17,7 @@ const Chat = () => {
     const getMessage = async  () => {
             try {
                const res = await query(collection(db, "message")) 
-               const unsub = onSnapshot(res, item => {
+                 onSnapshot(res, item => {
                  item.forEach((elem) => {
                      messages?.push(elem)
                  } )
@@ -27,7 +27,7 @@ const Chat = () => {
             }
     }
 
-    useEffect(() => {
+    useMemo(() => {
         getMessage()
     }, [])
 

@@ -1,5 +1,6 @@
 import { Box, Button, TextField, Typography } from "@material-ui/core";
-import { FC, useEffect, useState } from "react";
+import { useMemo } from "react";
+import { FC, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProductActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
@@ -15,12 +16,12 @@ const EditProduct: FC = () => {
     const { saveEditedProduct, editProduct, getProduct } = useProductActions()
     const [values, setValues] = useState({title: '',type: '',photo: '', price: 0})
 
-    useEffect(() => {
+    useMemo(() => {
         if(edit)
         setValues(edit)
     },[edit])
     
-    useEffect(() => {
+    useMemo(() => {
        editProduct(id)
     },[id])
     

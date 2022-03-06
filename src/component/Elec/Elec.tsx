@@ -1,6 +1,6 @@
 import { Box, Card, CardActions, CardContent, IconButton, Typography } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
-import { FC, useEffect } from 'react';
+import { FC, useMemo } from 'react';
 import { useElecActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
@@ -9,7 +9,7 @@ const Elec: FC = () => {
     const { getElected, deleteElec } = useElecActions()
     const { elec, error} = useTypedSelector(state => state.elec)
    
-    useEffect(() => {
+    useMemo(() => {
         getElected()
     }, [])
      

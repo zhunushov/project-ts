@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { AuthAction, AuthActionTypes } from './../../types/auth-types';
 import { Dispatch } from 'redux';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
@@ -41,7 +41,7 @@ export const googleAuth = () => {
 
 export const useAuth = () => {
     const [currentUser, setCurrentUser] = useState<any>()
-    useEffect(() => {
+    useMemo(() => {
         const onsub = onAuthStateChanged(auth, user => {
             setCurrentUser(user)
         })

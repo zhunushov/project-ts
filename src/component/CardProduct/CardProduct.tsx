@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState, useMemo } from "react";
 import {  Avatar, Box,  Button,  Card, CardActions, CardContent, CardMedia, IconButton, InputAdornment, makeStyles, TextField, Typography } from "@material-ui/core";
 import { BookmarkBorder, Delete, Edit, ShoppingCart } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
@@ -63,15 +63,15 @@ const CardProduct: FC<PropsItems> = ({item}) => {
     getProduct()
   }
 
-  useEffect(() => {
+  useMemo(() => {
     checkProductInCart(item.id) ? setColor(true): setColor(false)
   },[cart])
 
-  useEffect(() => {
+  useMemo(() => {
     getComment()
   }, [])
 
-  useEffect(() => {
+  useMemo(() => {
     checkElec(item.id) ? setColorElec(true): setColorElec(false)
   },[elec])
 

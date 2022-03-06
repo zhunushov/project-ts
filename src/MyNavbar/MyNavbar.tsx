@@ -1,6 +1,6 @@
 import { AppBar,  Badge, Box, Button, IconButton, Input, Toolbar, Typography } from "@material-ui/core";
 import { ShoppingCart, BookmarkBorder, AccessAlarm } from "@material-ui/icons";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
 import { useCartActions, useElecActions, useProductActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/useTypedSelector";
@@ -9,31 +9,30 @@ import { useAuth } from "../store/action-creators/auth";
 export default function MyNavbar(){
   const { cartLength } = useTypedSelector(state => state.cart)
   const { elecLength } = useTypedSelector(state => state.elec)
+  const auth = useAuth()   
   const { getCartLength } = useCartActions()
   const { getElectedLength } = useElecActions()
   const { getProduct } = useProductActions()
-  const auth = useAuth()   
   const [searchParams, setSearchParams] = useSearchParams()  
   const [searchVal, setSearchVal] = useState<string>(searchParams.get("q") || "")
-
-  useEffect(() => {
-    setSearchParams({
-      q: searchVal,
-      _limit: '6',
-      _page: '0',
-    })
-  }, [searchVal])
-
-  useEffect(() => {
+  
+  useMemo(() => {
     getCartLength()
     getElectedLength()
   }, [])
-
-  const handleValue = (e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
+  
+  const handleValue = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=> {
     getProduct()
     setSearchVal(e.target.value)
   }
   
+    useMemo(() => {
+      setSearchParams({
+        q: searchVal,
+        _limit: '6',
+        _page: '0',
+      })
+    }, [searchVal])
   return (
     <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between' }}>
       <AppBar position="static">

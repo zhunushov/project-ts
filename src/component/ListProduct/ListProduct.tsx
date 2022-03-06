@@ -1,15 +1,17 @@
 import { Pagination } from '@material-ui/lab';
+import { useMemo } from 'react';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useProductActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import CardProduct from '../CardProduct/CardProduct';
+import SideBar from '../SideBar/SideBar';
 
 const ListProduct = () => {
     const {products, error, loading, pagination} = useTypedSelector(state => state.product)
     const [params, setParams] = useSearchParams()
     const [ limit ] = useState<any>(6)
-    const [page, setPage] = useState<any>(params.get("_page") ? params.get("_page") : 1 )
+    const [page, setPage] = useState<any>(params.get("_page") || 1 )
     const { getProduct } = useProductActions()
 
 
@@ -29,7 +31,7 @@ const ListProduct = () => {
         setPage(pageVal)
     }   
 
-    useEffect(() => {
+    useMemo(() => {
         getProduct()
     },[])
 
@@ -44,13 +46,12 @@ const ListProduct = () => {
 
     return (
         <div>
+            <SideBar />
         <div style={{marginTop: "50px", display: "flex", alignItems: "center", justifyContent: 'center', flexWrap: 'wrap'}}>
-            {
-            products?.map(item => <CardProduct key={item.id} item={item}/>)
-            }
+        {products?.map(item => <CardProduct key={item.id} item={item}/>)}
         </div>
         <div style={{justifyContent: 'center', display: 'flex'}}>
-            <Pagination count={pagination} onChange={handlePage} page={+page} color='primary'/>
+        <Pagination count={pagination} onChange={handlePage} page={+page} color='primary'/>
         </div>
         </div>
     );

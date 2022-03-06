@@ -17,18 +17,16 @@ export function calcTotalPrice(values: ICart[]){
 }
 
 export function getProductsInCart(){
-    let cart = JSON.parse(localStorage.getItem('cart')|| '')
+    let cart = JSON.parse(`${localStorage.getItem('cart')}`)
     return cart ? cart.products.length : 0
 }
 
 export const addCart = (values: IProduct) => {
-    console.log(values);
-    
     return  (dispatch: Dispatch<CartAction>) => {
         try {
             let cart = JSON.parse(`${localStorage.getItem('cart')}`);
-            
-            if(!cart.products){
+
+            if(!cart){
                 cart = {
                     products: [],
                     totalPrice: 0
@@ -59,6 +57,7 @@ export const addCart = (values: IProduct) => {
             dispatch({type: CartActionTypes.GET_CART_LENGTH, payload: cart.products.length})
             dispatch({type: CartActionTypes.GET_CARTS, payload: cart})
         } catch (error: any) {
+            console.log(error)
             dispatch({type: CartActionTypes.GET_CART_ERROR, payload: error})
         }
     }
