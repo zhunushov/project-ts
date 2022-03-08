@@ -16,12 +16,7 @@ export function calcTotalPrice(values: ICart[]){
     return totalPrice
 }
 
-export function getProductsInCart(){
-    let cart = JSON.parse(`${localStorage.getItem('cart')}`)
-    return cart ? cart.products.length : 0
-}
-
-export const addCart = (values: IProduct) => {
+export const addCart = (values: any) => {
     return  (dispatch: Dispatch<CartAction>) => {
         try {
             let cart = JSON.parse(`${localStorage.getItem('cart')}`);
@@ -37,11 +32,11 @@ export const addCart = (values: IProduct) => {
                 count: 1,
                 subPrice: 0
             }
-            let filteredCart = cart.products.filter((elem: any) => elem.item.id === values.id)
+            let filteredCart = cart.products.filter((elem: any) => elem.item._id === values._id)
              
             if(filteredCart.length > 0){
 
-                cart.products = cart.products.filter((elem: any) => elem.item.id !== values.id)
+                cart.products = cart.products.filter((elem: any) => elem.item._id !== values._id)
 
             } else {
 
@@ -104,7 +99,7 @@ export const changeProductCount = (count: number, id: IProduct) => {
         try {
             let cart = JSON.parse(localStorage.getItem('cart') as string);
             cart.products = cart.products.map((elem: any) => {
-                if(elem.item.id === id){
+                if(elem.item._id === id){
                     elem.count = count
                     elem.subPrice = calcSubPrice(elem)
                 }
@@ -129,7 +124,8 @@ export const checkProductInCart = (id: number) => {
                     totalPrice: 0
                 }
             }
-            let newCart = cart.products.find((elem: any) => elem.item.id === id)
+            let newCart = cart.products.find((elem: any) => elem.item._id === id)
+            console.log(newCart, "new")
             return newCart ? true : false
         } catch (error: any) {
             dispatch({type: CartActionTypes.GET_CART_ERROR, payload: error})
@@ -137,7 +133,7 @@ export const checkProductInCart = (id: number) => {
     }
 }
  
-export const deleteCart =(id: ICart, price: number) => { 
+export const deleteCart =(id: ICart, price: number) => {
     return (dispatch: Dispatch<CartAction>) => {
         try {
             let cart = JSON.parse(`${localStorage.getItem('cart')}`)
@@ -146,21 +142,20 @@ export const deleteCart =(id: ICart, price: number) => {
                     products: []
                 }
             } 
-            for (let i = 0; i< cart.products.length; i++) { 
-              let targetItem = JSON.parse(cart.products[i].item.id); 
-              let targetItemPrice = JSON.parse(cart.products[i].item.price); 
+            for (let i = 0; i < cart.products.length; i++) { 
+                let Item = cart.products[i].item._id 
+                let Price = cart.products[i].item.price
                
-                if (targetItem === id) { 
+                if (Item === id) { 
                     cart.products.splice(i, 1); 
-                } 
-        
-                if (targetItemPrice === price){ 
+
+                } if (Price === price){
+
                   cart.totalPrice = cart.totalPrice - price 
                 } 
             } 
             cart = JSON.stringify(cart); 
             localStorage.setItem("cart", cart);
-            
             dispatch({type: CartActionTypes.GET_CARTS, payload: cart})
         } catch (error: any) {
             dispatch({type: CartActionTypes.GET_CART_ERROR, payload: error + "delete Cart"})

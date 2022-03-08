@@ -4,7 +4,6 @@ import { BookmarkBorder, Delete, Edit, ShoppingCart } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { useProductActions, useCartActions, useElecActions, useCommentActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { IProduct } from "../../types/IProduct";
 import { useAuth } from "../../store/action-creators/auth";
 
 
@@ -39,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface PropsItems {
-    item: IProduct
+    item:  any
 }
 
 const CardProduct: FC<PropsItems> = ({item}) => {
@@ -59,12 +58,13 @@ const CardProduct: FC<PropsItems> = ({item}) => {
   const auth = useAuth()
   
   const handleDelete = async () => {
-    await deleteProduct(item.id)
+    await deleteProduct(item)
     getProduct()
   }
 
   useMemo(() => {
-    checkProductInCart(item.id) ? setColor(true): setColor(false)
+    console.log(color)
+    checkProductInCart(item._id) ? setColor(true): setColor(false)
   },[cart])
 
   useMemo(() => {
@@ -72,32 +72,33 @@ const CardProduct: FC<PropsItems> = ({item}) => {
   }, [])
 
   useMemo(() => {
-    checkElec(item.id) ? setColorElec(true): setColorElec(false)
+    checkElec(item._id) ? setColorElec(true): setColorElec(false)
   },[elec])
 
   //!COMMENT
 
-  const { comment } = useTypedSelector(state => state.comment)  
+  const { comment } = useTypedSelector(state => state.comment) 
   const [values, setValues] = useState({text: ''})
   
   const handleSubmit = async () => {
     if(!values.text.trim()){
       return alert('заполните поля')}
     const elem: any = {
+        text: values.text,
         createdAt: new Date(),
         uid: auth?.uid,
         email: auth?.email,
         photoURL: auth?.photoURL,
         displayName: auth?.displayName}
 
-    await addCommnet(item.id, values, elem)
+    await addCommnet(item._id, elem)
     getComment()
     setValues({text: ""})
   } 
 
   const handledeleteComment = async (id: number) => {
     await deleteComment(id)
-          getComment()
+      getComment()
   } 
 
   return (
@@ -121,7 +122,7 @@ const CardProduct: FC<PropsItems> = ({item}) => {
      <ShoppingCart/></IconButton>
 
      <IconButton onClick={handleDelete}><Delete/></IconButton>
-     <IconButton onClick={() => navigate(`/edit/${item.id}`)}><Edit/></IconButton>
+     <IconButton onClick={() => navigate(`/edit/${item._id}`)}><Edit/></IconButton>
 
      <IconButton onClick={() => addElected(item)} color={colorElec ? 'secondary' : 'inherit'} >
      <BookmarkBorder/></IconButton>
@@ -142,20 +143,21 @@ const CardProduct: FC<PropsItems> = ({item}) => {
             </IconButton>
         </InputAdornment>)}}/>:null
       }
-      {comment?.map((elem) => (elem.productId === item.id ? 
-                <Card className={classes.cart} key={elem.id}>
+      {comment?.map((elem) => (elem.productId === item._id ? 
+                <Card className={classes.cart} key={elem._id}>
                 <Typography gutterBottom >
                     <span>
                  <Avatar src={elem.user.photoURL} className={classes.avatar} />
                     </span>
                    <Typography className={classes.email}>{elem.user.displayName || elem.user.email}</Typography>  
-                   <Typography> {elem.value.text}</Typography>  
-                   <IconButton onClick={() => handledeleteComment(elem.id)}>
+                   <Typography> {elem.user.text}</Typography>  
+                   <IconButton onClick={() => handledeleteComment(elem._id)}>
                        <Delete />
                    </IconButton>
                 </Typography>
                </Card>
-      :null))}
+      :null)
+      )}
       </Card>  
     </Box>
   );

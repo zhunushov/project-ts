@@ -6,19 +6,20 @@ import { useProductActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 type ParamsEditedProduct = {
-    id: string
+    id: any 
 }
 
 const EditProduct: FC = () => {
     const navigate = useNavigate()
-    const {id} = useParams<ParamsEditedProduct>()
+    const {id} = useParams<ParamsEditedProduct >()
     const { edit, error, loading} = useTypedSelector(state => state.product)    
     const { saveEditedProduct, editProduct, getProduct } = useProductActions()
     const [values, setValues] = useState({title: '',type: '',photo: '', price: 0})
 
     useMemo(() => {
-        if(edit)
-        setValues(edit)
+        if(edit){
+            setValues(edit)
+        }
     },[edit])
     
     useMemo(() => {

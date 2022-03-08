@@ -27,10 +27,10 @@ export const getProduct = () => {
     }
 }
 
-export const deleteProduct = (id: any) => {
+export const deleteProduct = (item: any) => {
     return async (dispatch: Dispatch <ProductAction>) => {
         try {
-             await axios.delete(`${API}/${PRODUCT}/${id}`)
+             await axios.delete(`${API}/${PRODUCT}/${item._id}`)
         } catch (error: any) {
             dispatch({type: ProductActionTypes.FETCH_PRODUCT_ERROR, payload: error})
         }
@@ -43,18 +43,20 @@ export const editProduct = (id: any) => {
             const { data } = await axios(`${API}/${PRODUCT}/${id}`)
             dispatch({type: ProductActionTypes.FETCH_PRODUCT_UPDATE, payload: data})
         } catch (error: any) {
+            console.log(error)
            dispatch({type: ProductActionTypes.FETCH_PRODUCT_ERROR, payload: error}) 
         }
     }
 }
 
-export const saveEditedProduct = (id: any, editedProduct: any) => {
+export const saveEditedProduct = (id: string, editedProduct: any) => {
     return async (dispatch: Dispatch<ProductAction>) => {
         try {
             dispatch({type: ProductActionTypes.FETCH_PRODUCT})
-            await axios.patch(`${API}/${PRODUCT}/${id}`, editedProduct)
+            await axios.put(`${API}/${PRODUCT}/${id}`, editedProduct)
             getProduct()
         } catch (error: any) {
+            console.log(error)
             dispatch({type: ProductActionTypes.FETCH_PRODUCT_ERROR, payload: error})
         }
     }
