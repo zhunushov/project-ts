@@ -16,9 +16,9 @@ export const addElected = (value: any) => {
                 item: value
             }
             
-            const filteredElec = elec.elected.filter((elem: any) => elem.item._id === value._id)
+            const filteredElec = elec.elected.filter((elem: any) => elem.item.id === value.id)
             if(filteredElec.length > 0) {
-                elec.elected = elec.elected.filter((elem: any) => elem.item._id !== value._id)
+                elec.elected = elec.elected.filter((elem: any) => elem.item.id !== value.id)
             }else {
                elec.elected.push(newElec)
             }
@@ -75,7 +75,7 @@ export const deleteElec = (value: any) => {
                 }
             }
 
-            elec.elected = elec.elected.filter((elem: any) =>  elem.item._id !== value._id)
+            elec.elected = elec.elected.filter((elem: any) =>  elem.item.id !== value.id)
             localStorage.setItem("elec", JSON.stringify(elec))
            dispatch({type: ElecActionTypes.GET_ELEC, payload: elec})
            dispatch({type: ElecActionTypes.GET_ELEC_LENGHT, payload: elec.elected.length})
@@ -94,7 +94,7 @@ export const checkElec = (id: number) => {
                 }
             }
 
-            let newElec = elec.elected.find((elem:any) => elem.item._id === id)
+            let newElec = elec.elected.find((elem:any) => elem.item.id === id)
 
             return newElec ? true : false
         } catch (error: any) {

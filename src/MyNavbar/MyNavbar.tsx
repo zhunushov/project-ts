@@ -1,6 +1,6 @@
 import { AppBar,  Badge, Box, Button, IconButton, Input, Toolbar, Typography } from "@material-ui/core";
 import { ShoppingCart, BookmarkBorder, AccessAlarm } from "@material-ui/icons";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
 import { useCartActions, useElecActions, useProductActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/useTypedSelector";
@@ -21,18 +21,21 @@ export default function MyNavbar(){
     getElectedLength()
   }, [])
   
-  const handleValue = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=> {
+  useMemo(() => {
+    setSearchParams({
+      q: searchVal,
+      _limit: '6',
+      _page: '0',
+    })
+  }, [searchVal])
+
+  const handleValue = useCallback((e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
     getProduct()
     setSearchVal(e.target.value)
-  }
   
-    useMemo(() => {
-      setSearchParams({
-        q: searchVal,
-        _limit: '6',
-        _page: '0',
-      })
-    }, [searchVal])
+  }, [])
+  
+    
   return (
     <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between' }}>
       <AppBar position="static">

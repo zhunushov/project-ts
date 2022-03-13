@@ -32,11 +32,11 @@ export const addCart = (values: any) => {
                 count: 1,
                 subPrice: 0
             }
-            let filteredCart = cart.products.filter((elem: any) => elem.item._id === values._id)
+            let filteredCart = cart.products.filter((elem: any) => elem.item.id === values.id)
              
             if(filteredCart.length > 0){
 
-                cart.products = cart.products.filter((elem: any) => elem.item._id !== values._id)
+                cart.products = cart.products.filter((elem: any) => elem.item.id !== values.d)
 
             } else {
 
@@ -99,7 +99,7 @@ export const changeProductCount = (count: number, id: IProduct) => {
         try {
             let cart = JSON.parse(localStorage.getItem('cart') as string);
             cart.products = cart.products.map((elem: any) => {
-                if(elem.item._id === id){
+                if(elem.item.id === id){
                     elem.count = count
                     elem.subPrice = calcSubPrice(elem)
                 }
@@ -124,8 +124,7 @@ export const checkProductInCart = (id: number) => {
                     totalPrice: 0
                 }
             }
-            let newCart = cart.products.find((elem: any) => elem.item._id === id)
-            console.log(newCart, "new")
+            let newCart = cart.products.find((elem: any) => elem.item.id === id)
             return newCart ? true : false
         } catch (error: any) {
             dispatch({type: CartActionTypes.GET_CART_ERROR, payload: error})
@@ -143,7 +142,7 @@ export const deleteCart =(id: ICart, price: number) => {
                 }
             } 
             for (let i = 0; i < cart.products.length; i++) { 
-                let Item = cart.products[i].item._id 
+                let Item = cart.products[i].item.id 
                 let Price = cart.products[i].item.price
                
                 if (Item === id) { 

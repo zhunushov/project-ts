@@ -30,7 +30,7 @@ export const getProduct = () => {
 export const deleteProduct = (item: any) => {
     return async (dispatch: Dispatch <ProductAction>) => {
         try {
-             await axios.delete(`${API}/${PRODUCT}/${item._id}`)
+             await axios.delete(`${API}/${PRODUCT}/${item.id}`)
         } catch (error: any) {
             dispatch({type: ProductActionTypes.FETCH_PRODUCT_ERROR, payload: error})
         }

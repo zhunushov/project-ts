@@ -49,11 +49,11 @@ const Cart = () => {
                             <TableCell>{item.item.price}</TableCell>
                             <TableCell>
                             <input type="number" value={item.count} min = '1'
-                             onChange={(e) => changeProductCount(+e.target.value, item.item._id)}/>
+                             onChange={(e) => changeProductCount(+e.target.value, item.item.id)}/>
                             </TableCell>
                             <TableCell>{item.subPrice}</TableCell>
                             <TableCell>
-                            <IconButton onClick={() => handleDeleteCart(item.item._id, item.item.price)} > 
+                            <IconButton onClick={() => handleDeleteCart(item.item.id, item.item.price)} > 
                              <Delete /> 
                             </IconButton>
                             </TableCell>

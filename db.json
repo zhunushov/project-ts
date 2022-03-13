@@ -1,0 +1,25 @@
+{
+  "product": [
+    {
+      "title": "apple ",
+      "type": "apple ",
+      "photo": "apple ",
+      "price": 1000,
+      "id": 1
+    }
+  ],
+  "comment": [
+    {
+      "productId": 1,
+      "user": {
+        "text": "d",
+        "createdAt": "2022-03-13T14:22:48.478Z",
+        "uid": "oLWJA1P1B0PxZtnRlPyUDCRyAGK2",
+        "email": "abbas@gmail.com",
+        "photoURL": null,
+        "displayName": null
+      },
+      "id": 1
+    }
+  ]
+}
